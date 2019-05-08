@@ -10,10 +10,11 @@ package retos2;
  * @author obito
  */
 public class Retos_2 {
-    /**
-     * @param args the command line arguments
-     */
+    public static int cantidadNumeros=0;
     public static void main(String[] args) {
-        // TODO code application logic here
+        cantidadNumeros = 5;
+        numerosAleatorios num= new numerosAleatorios();
+        num.generador((int) (Math.random()*(999-333)+300),cantidadNumeros);
+                
     }
 }
