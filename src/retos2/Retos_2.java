@@ -12,9 +12,10 @@ package retos2;
 public class Retos_2 {
     public static int cantidadNumeros=0;
     public static void main(String[] args) {
-        cantidadNumeros = 5;
+        cantidadNumeros = 4;
         numerosAleatorios num= new numerosAleatorios();
         num.generador((int) (Math.random()*(999-333)+300),cantidadNumeros);
+        num.generar_Distancias((int) (Math.random()*(999-333)+300),cantidadNumeros);
                 
     }
 }
