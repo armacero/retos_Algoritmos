@@ -23,12 +23,10 @@ public class Reto1 extends javax.swing.JFrame {
     int a_a, a_b, a_c, num_ind, num_participantes;
     double a_p;
     Individuo[] array_ind;
-    
+
     Pareja obPareja;
     ArrayList<Pareja> array_parejas = new ArrayList<>();
     ArrayList<Participante> arrayParticipante = new ArrayList<>();
-   
-   
 
     /**
      * Creates new form Reto1
@@ -292,8 +290,8 @@ public class Reto1 extends javax.swing.JFrame {
 
                 for (int j = 0; j < id_partici.size(); j++) {
                     //System.out.println(id_partici.get(i));
-                    array_part[j] = new Participante(array_ind[id_partici.get(j)].getId(),array_ind[id_partici.get(j)].getGenotipo());
-                    System.out.println(array_part[j].getId() +  ":" + array_part[j].getGenotipo());
+                    array_part[j] = new Participante(array_ind[id_partici.get(j)].getId(), array_ind[id_partici.get(j)].getGenotipo());
+                    System.out.println(array_part[j].getId() + ":" + array_part[j].getGenotipo());
                 }
                 obPareja = new Pareja();
                 m_Torneo(array_part);
@@ -301,10 +299,9 @@ public class Reto1 extends javax.swing.JFrame {
             }
             System.out.println("PAREJAS FORMADAS");
             for (int i = 0; i < arrayParticipante.size(); i++) {
-                System.out.println("ID: " + arrayParticipante.get(i).getId() +" Eval: " + arrayParticipante.get(i).getEvaluacion());
+                System.out.println("ID: " + arrayParticipante.get(i).getId() + " Eval: " + arrayParticipante.get(i).getEvaluacion());
                 //array_parejas.add(new Participante(arrayParticipante.get(i).getId(), arrayParticipante.get(i).getEvaluacion()),new Participante(arrayParticipante.get(i).getId(), arrayParticipante.get(i).getEvaluacion()));
             }
-            
 
         }
 
@@ -320,38 +317,35 @@ public class Reto1 extends javax.swing.JFrame {
         double a = Math.random();
         System.out.println("a: " + a);
         //m_obtenIndividuoMasApto(p_participantes);
-       
-        if (a > a_p ) {
+
+        if (a > a_p) {
             //Elegir al mas apto entre los participantes
             String[] partes = m_obtenIndividuoMasApto(p_participantes).split(",");
-            System.out.println("PARTES LENGT aqui" + partes.length);
+
             int id_participante = Integer.valueOf(partes[0]);
             //int evaluacion = Integer.valueOf(partes[1]);
             String genotipo = partes[1];
             //System.out.println("Mas Apto ID:" + id_participante + "Eval: " + evaluacion + "Genotipo:" + genotipo);
             System.out.println("*****************************");
-           
-            
+
             //array_parejas.add(id_participante);
             //array_parejas.add(evaluacion);
             //obPareja.setPadre(new Participante(id_participante, evaluacion));
-            arrayParticipante.add(new Participante(id_participante,genotipo));
-            
+            arrayParticipante.add(new Participante(id_participante, genotipo));
 
-        } else  {
+        } else {
             //Elegir al menos apto entre los participantes
             String[] partes = m_obtenIndividuoMenosApto(p_participantes).split(",");
             System.out.println("PARTES LENGT o aqu" + partes.length);
             int id_participante = Integer.valueOf(partes[0]);
-            //int evaluacion = Integer.valueOf(partes[1]);
             String genotipo = partes[1];
-           // System.out.println("Menos Apto ID:" + id_participante + "Eval: " + evaluacion + " Genotipo: " +genotipo);
+            // System.out.println("Menos Apto ID:" + id_participante + "Eval: " + evaluacion + " Genotipo: " +genotipo);
             System.out.println("*****************************");
             //array_parejas.add(id_participante);
             //array_parejas.add(evaluacion);
             //obPareja.setMadre(new Participante(id_participante, evaluacion));
-            arrayParticipante.add(new Participante(id_participante,genotipo));
-            
+            arrayParticipante.add(new Participante(id_participante, genotipo));
+
         }
 
         //array_pareja.add(obPareja);
@@ -360,7 +354,7 @@ public class Reto1 extends javax.swing.JFrame {
     public String m_obtenIndividuoMasApto(Participante[] p_participantes) {
         int mas_apto = p_participantes[0].getEvaluacion();
         int id_masApto = 0;
-        String genotipo ="";
+        String genotipo = "";
 
         for (int i = 0; i < p_participantes.length; i++) {
 //          System.out.println(nombres[i] + " " + sueldos[i]);
@@ -371,14 +365,14 @@ public class Reto1 extends javax.swing.JFrame {
 
             }
         }
-
-        return "" + id_masApto + "," + genotipo + "";
+        String cadena = id_masApto + "," + genotipo;
+        return cadena;
     }
 
     public String m_obtenIndividuoMenosApto(Participante[] p_participantes) {
         int menos_apto = p_participantes[0].getEvaluacion();
         int id_menosApto = 0;
-        String genotipo ="";
+        String genotipo = "";
         for (int i = 0; i < p_participantes.length; i++) {
 //          System.out.println(nombres[i] + " " + sueldos[i]);
             if (p_participantes[i].getEvaluacion() < menos_apto) {
@@ -387,7 +381,8 @@ public class Reto1 extends javax.swing.JFrame {
                 genotipo = p_participantes[i].getGenotipo();
             }
         }
-         return "" + id_menosApto + "," + genotipo + "";
+        String cadena = id_menosApto + "," + genotipo;
+        return cadena;
     }
 
     public ArrayList<Integer> m_obtenParticipantes(int p_numParticipantes) {
