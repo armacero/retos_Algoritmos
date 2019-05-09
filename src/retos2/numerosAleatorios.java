@@ -7,7 +7,7 @@ package retos2;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +15,11 @@ import java.util.Scanner;
  */
 public class numerosAleatorios {
 
+    public int[][] matriz_Distancias;
+    public int Distancia;
+    public Double eFuncion;
+    
+    
     public Double[] generador(int semilla, int cantidad) {
       
         Double[] numerosAleatorios = new Double[cantidad];
@@ -49,7 +54,7 @@ public class numerosAleatorios {
     public int[][] generar_Distancias(int semilla ,int cantidad)
     {
         
-        int[][] matriz_Distancias = new int[cantidad][cantidad];
+        
         String snumero2, snumero3, valor;
         int tam1, tam2, i, primerc;
         long numero1, numero2;
@@ -99,16 +104,28 @@ public class numerosAleatorios {
         System.out.println(imprime);
     }
     
-    public void sumatoria_Distancias()
+    public int sumatoria_Distancias(ArrayList<Integer> ruta)
     {
-        for (int i = 0; i < 10; i++) {
-            
+        int tamaño= ruta.size();
+        int distancia = 0;
+        for (int i = 0; i < tamaño; i++) {
+            int ciudad =ruta.get(i);
+            int ciudadSiguiente = ruta.get(i+1);
+            distancia= distancia+ matriz_Distancias[ciudad][ciudadSiguiente];
+//            if (i==tamaño-2) {
+//                break;
+//            }
         }
+        return distancia;
     }
     
     public void funcion_aptitud()
     {
-        
+        GUI gui = new GUI();
+        Distancia =sumatoria_Distancias(gui.Combinacion);
+        Double DistanciaC;
+        DistanciaC = Distancia*1.0;
+        eFuncion = 1/DistanciaC ;
     }
     
     
