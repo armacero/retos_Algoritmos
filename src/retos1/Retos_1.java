@@ -16,6 +16,9 @@ public class Retos_1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Reto1 obj_reto = new Reto1();
+        obj_reto.setVisible(true);
     }
     
 }
