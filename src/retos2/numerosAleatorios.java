@@ -175,5 +175,11 @@ public class numerosAleatorios {
         }
     }
     
+    public int Sumatoria()
+    {
+        return 0;
+        
+    }
+    
     
 }
