@@ -7,6 +7,7 @@ package retos1;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 
 /**
  *
@@ -238,29 +239,83 @@ public class Reto1 extends javax.swing.JFrame {
             //Definir el fenotipo y el genotipo de cada individuo
             int[] fenotipos = new int[num_ind];
             String[] genotipos = new String[num_ind];
-
+            //System.out.println("FENOTIPOS");
             for (int i = 0; i < num_ind; i++) {
                 fenotipos[i] = (int) (Math.random() * 100 + 1);
-                System.out.println(fenotipos[i]);
+                //System.out.println(i+1 + ":" + fenotipos[i]);
             }
 
-            genotipos = m_genotipos(fenotipos);
+            for (int i = 0; i < fenotipos.length; i++) {
+                genotipos[i] = m_obtenerGenotipo(fenotipos[i]);
+            }
+            //System.out.println("GENOTIPOS ADAPTADOS");
+            m_adaptaGenotipos(genotipos);
+
+            int[] array_evalua = new int[num_ind];
+
+            //Evaluacion de Fx
+            for (int i = 0; i < num_ind; i++) {
+                array_evalua[i] = (int) m_evalua(a_a, a_b, a_c, fenotipos[i]);
+            }
+            //Proceso de seleccion
+            //Elegir que individuos van a participar en el torneo
+            int k_participantes = (int)(num_ind / 2);
+            
+            int [] array_part = new int[k_participantes];
+            System.out.println("    INDIVIDUOS PARTICIPANTES");
+            for (int i = 0; i < k_participantes; i++) {
+                array_part[i] =  (int)(Math.random()*6+1);
+                System.out.println(array_part[0]);
+            }
+            
+            
+            
+            
+            
 
             Individuo[] array_ind = new Individuo[num_ind];
+            txtSalidas.append("\nIndividuo:\tFenotipo:\tGenotipo:\tEvaluación f(x)\tSeleccion");
+            for (int i = 0; i < num_ind; i++) {
+                array_ind[i] = new Individuo(i, fenotipos[i], genotipos[i],array_evalua[i]);
+                txtSalidas.append("\n\n" + array_ind[i].getId() + "\t" + array_ind[i].getFenotipo() + "\t" + array_ind[i].getGenotipo() + "\t" + array_ind[i].getEvaluacion());
+            }
 
         }
 
 
     }//GEN-LAST:event_btn_generaAbcActionPerformed
 
-    private String[] m_genotipos(int[] fenotipos) {
-        String array[] = new String[fenotipos.length];
-        
-        
-        
-        
-        
-        return array;
+    public double m_evalua(int p_a, int p_b, int p_c, int p_x) {
+        double resultado = (p_a * Math.pow(p_x, 2)) + (p_b * p_x) + p_c;
+        return (int)resultado;
+    }
+
+    public void m_adaptaGenotipos(String[] p_genotipos) {
+        int longitud = genotipoMasLargo(p_genotipos);
+        for (int i = 0; i < p_genotipos.length; i++) {
+            while (p_genotipos[i].length() < longitud) {
+                p_genotipos[i] = "0" + p_genotipos[i];
+
+            }
+            System.out.println(p_genotipos[i]);
+        }
+
+    }
+
+    public static String m_obtenerGenotipo(int numero) {
+        String binario = Integer.toBinaryString(numero);
+
+        return binario;
+    }
+
+    public static int genotipoMasLargo(String[] cadenas) {
+        String mayor = cadenas[0];
+        for (int i = 1; i < cadenas.length; i++) {
+            if (cadenas[i].length() > mayor.length()) {
+                mayor = cadenas[i];
+            }
+        }
+        return mayor.length();
     }
 
     /**
@@ -277,16 +332,24 @@ public class Reto1 extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reto1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reto1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reto1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reto1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reto1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reto1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reto1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reto1.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

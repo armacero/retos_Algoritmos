@@ -13,11 +13,22 @@ public class Individuo {
 
     int Id, fenotipo;
     String genotipo;
+    int evaluacion;
 
-    public Individuo(int Id, int fenotipo, String genotipo) {
+    public Individuo(int Id, int fenotipo, String genotipo, int evaluacion) {
         this.Id = Id;
         this.fenotipo = fenotipo;
         this.genotipo = genotipo;
+        this.evaluacion = evaluacion;
+    }
+
+    
+    public double getEvaluacion() {
+        return evaluacion;
+    }
+
+    public void setEvaluacion(int evaluacion) {
+        this.evaluacion = evaluacion;
     }
 
     public int getId() {
