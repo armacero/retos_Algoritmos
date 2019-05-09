@@ -67,6 +67,7 @@ public class Reto1 extends javax.swing.JFrame {
         txt_numIndividuos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Selección por torneo probabilistico.");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Entrada"));
 
