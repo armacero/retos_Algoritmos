@@ -13,6 +13,8 @@ public class Retos_2 {
     public static int cantidadNumeros=0;
     public static void main(String[] args) {
         cantidadNumeros = 4;
+        GUI gui= new GUI();
+     
         numerosAleatorios num= new numerosAleatorios();
         num.generador((int) (Math.random()*(999-333)+300),cantidadNumeros);
         num.generar_Distancias((int) (Math.random()*(999-333)+300),cantidadNumeros);

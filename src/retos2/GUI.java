@@ -33,6 +33,7 @@ import javax.swing.JTextArea;
  */
 public class GUI extends JFrame{
     JTextArea messages;
+    public static ArrayList<Integer> Combinacion;
     ArrayList<Integer> numeros = new ArrayList();
     public GUI(){
         super("Agente Viajero");
@@ -86,6 +87,7 @@ public class GUI extends JFrame{
                 for (int k = 0; k < numeros.size(); k++) {
                     for (int l = 0; l < numeros.size(); l++) {
                         r=""+numeros.get(i)+numeros.get(j)+numeros.get(k)+numeros.get(l);
+                        Combinacion.add(numeros.get(i)+numeros.get(j)+numeros.get(k)+numeros.get(l));
                         System.out.println(r);
                     }
                 }
