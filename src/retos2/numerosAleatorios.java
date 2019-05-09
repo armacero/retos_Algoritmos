@@ -98,4 +98,18 @@ public class numerosAleatorios {
         }
         System.out.println(imprime);
     }
+    
+    public void sumatoria_Distancias()
+    {
+        for (int i = 0; i < 10; i++) {
+            
+        }
+    }
+    
+    public void funcion_aptitud()
+    {
+        
+    }
+    
+    
 }
