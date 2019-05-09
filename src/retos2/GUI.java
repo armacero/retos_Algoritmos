@@ -33,8 +33,11 @@ import javax.swing.JTextArea;
  */
 public class GUI extends JFrame{
     JTextArea messages;
-    public static ArrayList<ArrayList<Integer>> Combinacion;
-     
+    public ArrayList<ArrayList<Integer>> Combinacion = new ArrayList<ArrayList<Integer>>();
+     ArrayList<Integer> dentroLinea;
+    public int num;
+    public Double[] numeros_Aleatorios;
+    public int[][] matriz_Distancias;
     ArrayList<Integer> numeros = new ArrayList();
     public GUI(){
         super("Agente Viajero");
@@ -70,10 +73,15 @@ public class GUI extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int num = Integer.parseInt(JOptionPane.showInputDialog(cp, "Ingresa número de ciudades", JOptionPane.INPUT_VALUE_PROPERTY));
+                num= Integer.parseInt(JOptionPane.showInputDialog(cp, "Ingresa número de ciudades", JOptionPane.INPUT_VALUE_PROPERTY));
                 for (int i=1;i<=num;i++){
                     numeros.add(i);
                 }
+                 generarComb();
+                 numerosAleatorios numerosA= new numerosAleatorios();
+                 numeros_Aleatorios= numerosA.generador((int) (Math.random()*(999-333)+300),num);
+                 matriz_Distancias= numerosA.generar_Distancias((int) (Math.random()*(999-333)+300),num);
+                 numerosA.funcion_aptitud(Combinacion);
             }
         });
         cuidades.add(menuItem);
@@ -83,7 +91,8 @@ public class GUI extends JFrame{
     
     public void generarComb(){
         String r;
-        ArrayList<Integer> dentroLinea = new ArrayList<Integer>();
+        
+         dentroLinea = new ArrayList<Integer>();
         for (int i = 0; i < numeros.size(); i++) {
            
             for (int j = 0; j < numeros.size(); j++) {
@@ -95,9 +104,9 @@ public class GUI extends JFrame{
                         dentroLinea.add(numeros.get(j));
                         dentroLinea.add(numeros.get(k));
                         dentroLinea.add(numeros.get(l));
-                        r=""+numeros.get(i)+numeros.get(j)+numeros.get(k)+numeros.get(l);
+                        //r=""+numeros.get(i)+numeros.get(j)+numeros.get(k)+numeros.get(l);
                         Combinacion.add(dentroLinea);
-                        System.out.println(r);
+                        //System.out.println(r);
                         dentroLinea = new ArrayList<Integer>();
                     }
                 }

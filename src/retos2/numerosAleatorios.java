@@ -65,25 +65,24 @@ public class numerosAleatorios {
         tam1 = valor.length();
         System.out.println("Cantidad de digitos:  " + tam1);
         numero1 = semilla;
-        
+        matriz_Distancias = new int[cantidad][cantidad];
         for (i = 0; i < cantidad; i++) {
             for (int j = 0; j < cantidad; j++) {
-                if(i==j)
-                {
+                if (i == j) {
+                   
                     matriz_Distancias[i][j] = 0;
-                }else
-                {
+                } else {
                     numero2 = (long) Math.pow(numero1, 2);
-            snumero2 = Long.toString(numero2);
-            tam2 = snumero2.length();
-            primerc = (tam2 - tam1) / 2;
-            snumero3 = snumero2.substring(primerc, primerc + tam1);
-            System.out.println(i + "- " + snumero3);
-            matriz_Distancias[i][j] = Integer.parseInt(snumero3);
-            numero1 = Integer.parseInt(snumero3);
-            //(formateador.format (valores));
+                    snumero2 = Long.toString(numero2);
+                    tam2 = snumero2.length();
+                    primerc = (tam2 - tam1) / 2;
+                    snumero3 = snumero2.substring(primerc, primerc + tam1);
+                    //System.out.println(i + "- " + snumero3);
+                    matriz_Distancias[i][j] = Integer.parseInt(snumero3);
+                    numero1 = Integer.parseInt(snumero3);
+                    //(formateador.format (valores));
                 }
-            
+                
             }
             
         }
@@ -110,27 +109,45 @@ public class numerosAleatorios {
         int tamaño= ruta.size();
         int distancia = 0;
         for (int i = 0; i < tamaño; i++) {
-            int ciudad =ruta.get(i);
+             if (i==tamaño-2) {
+                 i=tamaño;
+                break;
+            }
+             if (i==tamaño) {
+                
+            }
+            else
+             {
+                 int ciudad =ruta.get(i);
             int ciudadSiguiente = ruta.get(i+1);
+            
             distancia= distancia+ matriz_Distancias[ciudad][ciudadSiguiente];
-//            if (i==tamaño-2) {
-//                break;
-//            }
+             }
+            
+            
+           
         }
         return distancia;
     }
     
-    public void funcion_aptitud()
+    public void funcion_aptitud(ArrayList<ArrayList<Integer>> combinaciones)
     {
-        GUI gui = new GUI();
-        int tamaño= gui.Combinacion.get(1).size();
+        
+        
+        
+        int tamaño= combinaciones.size();
         Distancia = new int[tamaño];
         eFuncion = new Double[tamaño];
-        for (int i = 0; i < tamaño; i++) {
-            Distancia[i] =sumatoria_Distancias(gui.Combinacion.get(i));
-        Double DistanciaC;
-        DistanciaC = Distancia[i]*1.0;
-        eFuncion[i] = 1/DistanciaC ;
+        for (int i = 0; i < combinaciones.size(); i++) {
+
+            Distancia[i] = sumatoria_Distancias(combinaciones.get(i));
+            Double DistanciaC;
+            DistanciaC = Distancia[i] * 1.0;
+            eFuncion[i] = 1 / DistanciaC;
+
+            System.out.println("Funcion: " + eFuncion[i] + "\n"
+                    + "Distancia: " + Distancia[i]);
+
         }
         
     }
