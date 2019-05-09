@@ -14,7 +14,8 @@ import java.text.DecimalFormatSymbols;
  */
 public class Reto1 extends javax.swing.JFrame {
 
-    double a_p, a_a, a_b, a_c;
+    int a_a, a_b, a_c, num_ind, num_participantes;
+    double a_p;
 
     /**
      * Creates new form Reto1
@@ -47,6 +48,8 @@ public class Reto1 extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtSalidas = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        txt_numIndividuos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,27 +102,27 @@ public class Reto1 extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btn_generaAbc.setText("Iniciar algoritmo");
@@ -146,6 +149,8 @@ public class Reto1 extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
         );
 
+        jLabel7.setText("Num. Individuos:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,8 +161,15 @@ public class Reto1 extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_generaAbc)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_generaAbc)
+                                    .addComponent(jLabel7)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(txt_numIndividuos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -167,7 +179,11 @@ public class Reto1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(btn_generaAbc))
+                        .addComponent(btn_generaAbc)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_numIndividuos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -181,20 +197,71 @@ public class Reto1 extends javax.swing.JFrame {
 
     private void btn_generaAbcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generaAbcActionPerformed
         // TODO add your handling code here:
-        /*
+
+        if (txt_numIndividuos.getText().length() <= 0) {
+            System.out.println("Ingresa el numero de individuos");
+        } else {
+            //Limpiar las cajas de texto
+            txta.setText("");
+            txtb.setText("");
+            txtc.setText("");
+            num_ind = Integer.valueOf(txt_numIndividuos.getText());
+
+            /*
         Generar de manera aleatoria los valores de a, b, c
         y el valor de p
-         */
-        //Definir el valor de p, el cual debe estar entre el rango 0.5<p<= 1
-        a_p  = 0.785;
-        
+             */
+            //Definir el valor de p, el cual debe estar entre el rango 0.5<p<= 1
+            a_p = 0.785;
+            //Definir el valor de a,b y c
 
-       
+            int[] datos = m_generar_Datos((int) (Math.random() * (999 - 333) + 300), 3);
 
-        
+            a_a = datos[0];
+            a_b = datos[1];
+            a_c = datos[2];
+
+            txta.setText(a_a + "");
+            txtb.setText(a_b + "");
+            txtc.setText(a_c + "");
+            txtp.setText(a_p + "");
+
+            txtSalidas.append("Entradas:\n");
+            txtSalidas.append("*****************************");
+            txtSalidas.append("\np=" + a_p + "\n");
+            txtSalidas.append("a=" + a_a + "\n");
+            txtSalidas.append("b=" + a_b + "\n");
+            txtSalidas.append("c=" + a_c + "\n");
+            txtSalidas.append("Individuos=" + num_ind + "\n");
+            txtSalidas.append("*****************************");
+
+            //Definir el fenotipo y el genotipo de cada individuo
+            int[] fenotipos = new int[num_ind];
+            String[] genotipos = new String[num_ind];
+
+            for (int i = 0; i < num_ind; i++) {
+                fenotipos[i] = (int) (Math.random() * 100 + 1);
+                System.out.println(fenotipos[i]);
+            }
+
+            genotipos = m_genotipos(fenotipos);
+
+            Individuo[] array_ind = new Individuo[num_ind];
+
+        }
 
 
     }//GEN-LAST:event_btn_generaAbcActionPerformed
+
+    private String[] m_genotipos(int[] fenotipos) {
+        String array[] = new String[fenotipos.length];
+        
+        
+        
+        
+        
+        return array;
+    }
 
     /**
      * @param args the command line arguments
@@ -235,34 +302,25 @@ public class Reto1 extends javax.swing.JFrame {
 
     }
 
-    public Double[] generador(int semilla, int cantidad) {
-
-        Double[] numerosAleatorios = new Double[cantidad];
+    public int[] m_generar_Datos(int semilla, int cantidad) {
+        int[] valores = new int[cantidad];
         String snumero2, snumero3, valor;
         int tam1, tam2, i, primerc;
         long numero1, numero2;
-        Double resul;
-
         valor = "" + semilla;
         tam1 = valor.length();
-        //System.out.println("Cantidad de digitos:  " + tam1);
         numero1 = semilla;
-        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-        simbolos.setDecimalSeparator('.');
-        for (i = 1; i <= cantidad; i++) {
+        for (i = 0; i < cantidad; i++) {
             numero2 = (long) Math.pow(numero1, 2);
             snumero2 = Long.toString(numero2);
             tam2 = snumero2.length();
             primerc = (tam2 - tam1) / 2;
             snumero3 = snumero2.substring(primerc, primerc + tam1);
-            valor = "." + snumero3;
-            resul = Double.parseDouble(valor);
-            //System.out.println(i + "- " + resul);
-            numerosAleatorios[i - 1] = resul;
+            valores[i] = Integer.parseInt(snumero3);
             numero1 = Integer.parseInt(snumero3);
-
         }
-        return numerosAleatorios;
+
+        return valores;
     }
 
 
@@ -274,10 +332,12 @@ public class Reto1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtSalidas;
+    private javax.swing.JTextField txt_numIndividuos;
     private javax.swing.JTextField txta;
     private javax.swing.JTextField txtb;
     private javax.swing.JTextField txtc;
