@@ -8,8 +8,10 @@ package retos1;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Stack;
 import java.util.stream.IntStream;
 import static java.util.stream.StreamSupport.intStream;
 import static java.util.stream.StreamSupport.intStream;
@@ -23,6 +25,8 @@ public class Reto1 extends javax.swing.JFrame {
     int a_a, a_b, a_c, num_ind, num_participantes;
     double a_p;
     Individuo[] array_ind;
+    double prob_mutacion = 0.1;
+    int[] fenotipos;
 
     Pareja obPareja;
     ArrayList<Pareja> array_parejas = new ArrayList<>();
@@ -206,6 +210,11 @@ public class Reto1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void m_obtenFenotipos() {
+
+    }
+
+
     private void btn_generaAbcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generaAbcActionPerformed
         // TODO add your handling code here:
 
@@ -238,69 +247,77 @@ public class Reto1 extends javax.swing.JFrame {
             txtc.setText(a_c + "");
             txtp.setText(a_p + "");
 
-            txtSalidas.append("Entradas:\n");
-            txtSalidas.append("*****************************");
-            txtSalidas.append("\np=" + a_p + "\n");
-            txtSalidas.append("a=" + a_a + "\n");
-            txtSalidas.append("b=" + a_b + "\n");
-            txtSalidas.append("c=" + a_c + "\n");
-            txtSalidas.append("Individuos=" + num_ind + "\n");
-            txtSalidas.append("*****************************");
+            for (int i = 0; i < 10; i++) {
+                txtSalidas.append("\n*************************************************");
+                txtSalidas.append("\nGeneración:" + i + "\n");
 
-            //Definir el fenotipo y el genotipo de cada individuo
-            int[] fenotipos = new int[num_ind];
-            String[] genotipos = new String[num_ind];
-            //System.out.println("FENOTIPOS");
-            for (int i = 0; i < num_ind; i++) {
-                fenotipos[i] = (int) (Math.random() * 100 + 1);
-                //System.out.println(i+1 + ":" + fenotipos[i]);
-            }
+                txtSalidas.append("Entradas:\n");
+                txtSalidas.append("*****************************");
+                txtSalidas.append("\np=" + a_p + "\n");
+                txtSalidas.append("a=" + a_a + "\n");
+                txtSalidas.append("b=" + a_b + "\n");
+                txtSalidas.append("c=" + a_c + "\n");
+                txtSalidas.append("Individuos=" + num_ind + "\n");
+                txtSalidas.append("*****************************");
 
-            for (int i = 0; i < fenotipos.length; i++) {
-                genotipos[i] = m_obtenerGenotipo(fenotipos[i]);
-            }
-            //System.out.println("GENOTIPOS ADAPTADOS");
-            m_adaptaGenotipos(genotipos);
-
-            int[] array_evalua = new int[num_ind];
-
-            //Evaluacion de Fx
-            for (int i = 0; i < num_ind; i++) {
-                array_evalua[i] = (int) m_evalua(a_a, a_b, a_c, fenotipos[i]);
-            }
-
-            array_ind = new Individuo[num_ind];
-            txtSalidas.append("\nIndividuo:\tFenotipo:\tGenotipo:\tEvaluación f(x)\tSeleccion");
-            for (int i = 0; i < num_ind; i++) {
-                array_ind[i] = new Individuo(i, fenotipos[i], genotipos[i], array_evalua[i]);
-                txtSalidas.append("\n\n" + array_ind[i].getId() + "\t" + array_ind[i].getFenotipo() + "\t" + array_ind[i].getGenotipo() + "\t" + array_ind[i].getEvaluacion());
-            }
-
-            //Proceso de seleccion
-            //Elegir que individuos van a participar en el torneo
-            int k_participantes = (int) (num_ind / 2);
-
-            Participante[] array_part = new Participante[k_participantes];
-            System.out.println("    INDIVIDUOS PARTICIPANTES :" + k_participantes);
-
-            ArrayList<Integer> id_partici = new ArrayList<>();
-            for (int i = 0; i < num_ind; i++) {
-
-                id_partici = m_obtenParticipantes(k_participantes);
-
-                for (int j = 0; j < id_partici.size(); j++) {
-                    //System.out.println(id_partici.get(i));
-                    array_part[j] = new Participante(array_ind[id_partici.get(j)].getId(), array_ind[id_partici.get(j)].getGenotipo());
-                    System.out.println(array_part[j].getId() + ":" + array_part[j].getGenotipo());
+                //Definir el fenotipo y el genotipo de cada individuo
+                fenotipos = new int[num_ind];
+                String[] genotipos = new String[num_ind];
+                //System.out.println("FENOTIPOS");
+                boolean flag = true;
+                if (flag = true) {
+                    for (int p = 0; p < num_ind; p++) {
+                        fenotipos[p] = (int) (Math.random() * 100 + 1);
+                        //System.out.println(i+1 + ":" + fenotipos[i]);
+                    }
+                    flag = false;
                 }
-                obPareja = new Pareja();
-                m_Torneo(array_part);
 
-            }
-            System.out.println("PAREJAS FORMADAS");
-            for (int i = 0; i < arrayParticipante.size(); i++) {
-                System.out.println("ID: " + arrayParticipante.get(i).getId() + " Eval: " + arrayParticipante.get(i).getEvaluacion());
-                //array_parejas.add(new Participante(arrayParticipante.get(i).getId(), arrayParticipante.get(i).getEvaluacion()),new Participante(arrayParticipante.get(i).getId(), arrayParticipante.get(i).getEvaluacion()));
+                for (int o = 0; o < fenotipos.length; o++) {
+                    genotipos[o] = m_obtenerGenotipo(fenotipos[o]);
+                }
+                //System.out.println("GENOTIPOS ADAPTADOS");
+                m_adaptaGenotipos(genotipos);
+
+                int[] array_evalua = new int[num_ind];
+
+                //Evaluacion de Fx
+                for (int n = 0; n < num_ind; n++) {
+                    array_evalua[n] = (int) m_evalua(a_a, a_b, a_c, fenotipos[n]);
+                }
+
+                array_ind = new Individuo[num_ind];
+                txtSalidas.append("\nIndividuo:\tFenotipo:\tGenotipo:\tEvaluación f(x)\tSeleccion");
+                for (int l = 0; l < num_ind; l++) {
+                    array_ind[l] = new Individuo(l, fenotipos[l], genotipos[l], array_evalua[l]);
+                    txtSalidas.append("\n\n" + array_ind[l].getId() + "\t" + array_ind[l].getFenotipo() + "\t" + array_ind[l].getGenotipo() + "\t" + array_ind[l].getEvaluacion());
+                }
+
+                //Proceso de seleccion
+                //Elegir que individuos van a participar en el torneo
+                int k_participantes = (int) (num_ind / 2);
+
+                Participante[] array_part = new Participante[k_participantes];
+                System.out.println("    INDIVIDUOS PARTICIPANTES :");
+
+                ArrayList<Integer> id_partici = new ArrayList<>();
+                for (int h = 0; h < num_ind; h++) {
+
+                    id_partici = m_obtenParticipantes(k_participantes);
+
+                    for (int j = 0; j < id_partici.size(); j++) {
+                        //System.out.println(id_partici.get(i));
+                        array_part[j] = new Participante(array_ind[id_partici.get(j)].getId(), (int) array_ind[id_partici.get(j)].getEvaluacion(), array_ind[id_partici.get(j)].getGenotipo());
+                        System.out.println(array_part[j].getId() + ":" + array_part[j].getEvaluacion() + ":" + array_part[j].getGenotipo());
+                    }
+
+                    m_Torneo(array_part);
+
+                }
+
+                System.out.println("Parejas Creadas");
+                apilar(arrayParticipante);
+                m_cruce(array_parejas);
             }
 
         }
@@ -320,35 +337,32 @@ public class Reto1 extends javax.swing.JFrame {
 
         if (a > a_p) {
             //Elegir al mas apto entre los participantes
+            //System.out.println(m_obtenIndividuoMasApto(p_participantes));
             String[] partes = m_obtenIndividuoMasApto(p_participantes).split(",");
 
             int id_participante = Integer.valueOf(partes[0]);
             //int evaluacion = Integer.valueOf(partes[1]);
             String genotipo = partes[1];
-            //System.out.println("Mas Apto ID:" + id_participante + "Eval: " + evaluacion + "Genotipo:" + genotipo);
+            System.out.println("Mas Apto ID:" + id_participante + "Genotipo:" + genotipo);
             System.out.println("*****************************");
-
-            //array_parejas.add(id_participante);
-            //array_parejas.add(evaluacion);
-            //obPareja.setPadre(new Participante(id_participante, evaluacion));
-            arrayParticipante.add(new Participante(id_participante, genotipo));
+            arrayParticipante.add(new Participante(genotipo, id_participante));
+            //obPareja.setPadre(new Participante(id_participante, genotipo));
 
         } else {
             //Elegir al menos apto entre los participantes
+
+            //System.out.println(m_obtenIndividuoMenosApto(p_participantes));
             String[] partes = m_obtenIndividuoMenosApto(p_participantes).split(",");
-            System.out.println("PARTES LENGT o aqu" + partes.length);
+
             int id_participante = Integer.valueOf(partes[0]);
             String genotipo = partes[1];
-            // System.out.println("Menos Apto ID:" + id_participante + "Eval: " + evaluacion + " Genotipo: " +genotipo);
+            System.out.println("Menos Apto ID:" + id_participante + " Genotipo: " + genotipo);
             System.out.println("*****************************");
-            //array_parejas.add(id_participante);
-            //array_parejas.add(evaluacion);
-            //obPareja.setMadre(new Participante(id_participante, evaluacion));
-            arrayParticipante.add(new Participante(id_participante, genotipo));
+            arrayParticipante.add(new Participante(genotipo, id_participante));
+            //obPareja.setMadre(new Participante(id_participante, genotipo));
 
         }
 
-        //array_pareja.add(obPareja);
     }
 
     public String m_obtenIndividuoMasApto(Participante[] p_participantes) {
@@ -358,7 +372,7 @@ public class Reto1 extends javax.swing.JFrame {
 
         for (int i = 0; i < p_participantes.length; i++) {
 //          System.out.println(nombres[i] + " " + sueldos[i]);
-            if (p_participantes[i].getEvaluacion() > mas_apto) {
+            if (p_participantes[i].getEvaluacion() >= mas_apto) {
                 mas_apto = p_participantes[i].getEvaluacion();
                 id_masApto = p_participantes[i].getId();
                 genotipo = p_participantes[i].getGenotipo();
@@ -366,22 +380,124 @@ public class Reto1 extends javax.swing.JFrame {
             }
         }
         String cadena = id_masApto + "," + genotipo;
+        //System.out.println("CADENA MAS APTO" + cadena);
         return cadena;
+    }
+
+    public void apilar(ArrayList<Participante> arrayParticipantes) {
+
+        Stack v_pila = new Stack();
+        for (int i = 0; i < arrayParticipantes.size(); i++) {
+            v_pila.push(arrayParticipantes.get(i).getId());
+            v_pila.push(arrayParticipantes.get(i).getGenotipo());
+        }
+        while (!v_pila.empty()) {
+            //System.out.println(v_pila.pop());
+            Participante v_padre = new Participante(String.valueOf(v_pila.pop()), Integer.valueOf(v_pila.pop() + ""));
+            Participante v_madre = new Participante(String.valueOf(v_pila.pop()), Integer.valueOf(v_pila.pop() + ""));
+            obPareja = new Pareja(v_padre, v_madre);
+            array_parejas.add(obPareja);
+        }
+
+    }
+
+    public void m_cruce(ArrayList<Pareja> p_array) {
+
+        for (int i = 0; i < p_array.size(); i++) {
+            System.out.println("");
+            System.out.println("Padre:" + p_array.get(i).getPadre().getId() + " " + p_array.get(i).getPadre().getGenotipo());
+            System.out.println("Madre:" + p_array.get(i).getMadre().getId() + " " + p_array.get(i).getMadre().getGenotipo());
+
+            //Cruce genotipos
+            String genoPadre = p_array.get(i).getPadre().getGenotipo();
+            String genoMadre = p_array.get(i).getMadre().getGenotipo();
+
+            System.out.println("GENOTIPO PADRE:" + genoPadre);
+            System.out.println("GENOTIPO MADRE:" + genoMadre);
+            System.out.println("");
+            //Actualizacion de nuevos genotipos
+
+            String genoCruce1 = intercambiar(genoPadre, genoMadre);
+            String genoCruce2 = intercambiar(genoPadre, genoMadre);
+
+            p_array.get(i).getPadre().setGenotipo(genoCruce1);
+            p_array.get(i).getMadre().setGenotipo(genoCruce2);
+
+            System.out.println("Nuevos Genotipos");
+            System.out.println("Padre:" + p_array.get(i).getPadre().getId() + " " + p_array.get(i).getPadre().getGenotipo());
+            System.out.println("Madre:" + p_array.get(i).getMadre().getId() + " " + p_array.get(i).getMadre().getGenotipo());
+
+            System.out.println("Genotipos Mutados");
+            p_array.get(i).getPadre().setGenotipo(m_verificaMutacion(genoCruce1));
+            p_array.get(i).getMadre().setGenotipo(m_verificaMutacion(genoCruce2));
+            System.out.println("Padre:" + p_array.get(i).getPadre().getId() + " " + p_array.get(i).getPadre().getGenotipo());
+            System.out.println("Madre:" + p_array.get(i).getMadre().getId() + " " + p_array.get(i).getMadre().getGenotipo());
+            
+            
+           // fenotipos[i] = binario_decimal(Integer.valueOf(m_verificaMutacion(genoCruce1)));
+
+        }
+
+    }
+    
+    public int binario_decimal(int numero){
+        int decimal = 0;
+        int binario =numero;
+        int pow = 0;
+        
+        while(binario!= 0){
+            int ult_dig = binario % 10;
+            decimal+= ult_dig * Math.pow(2, pow);
+            pow++;
+            binario = binario/10;
+        }
+        return decimal;
+    }
+
+    public String m_verificaMutacion(String p_genotipo) {
+        String genotipo_mutado = "";
+        char[] dig = p_genotipo.toCharArray();
+        for (int i = 0; i < dig.length; i++) {
+            double a = Math.random();
+            if (a <= prob_mutacion) {
+                if (dig[i] == '0') {
+                    dig[i] = '1';
+                } else {
+                    dig[i] = '1';
+                }
+            }
+        }
+
+        genotipo_mutado = String.valueOf(dig);
+        return genotipo_mutado;
+
+    }
+
+    //Metdodo para combinar los fenotipos
+    public String intercambiar(String p_cade1, String p_caden2) {
+        String cruce = "";
+        if (p_cade1.length() >= 3 && p_caden2.length() >= 3) {
+            cruce = p_cade1.substring(0, 4) + "" + p_caden2.substring(0, 4);
+
+        }
+        return cruce;
+
     }
 
     public String m_obtenIndividuoMenosApto(Participante[] p_participantes) {
         int menos_apto = p_participantes[0].getEvaluacion();
+
         int id_menosApto = 0;
         String genotipo = "";
         for (int i = 0; i < p_participantes.length; i++) {
-//          System.out.println(nombres[i] + " " + sueldos[i]);
-            if (p_participantes[i].getEvaluacion() < menos_apto) {
+            if (p_participantes[i].getEvaluacion() <= menos_apto) {
                 menos_apto = p_participantes[i].getEvaluacion();
                 id_menosApto = p_participantes[i].getId();
                 genotipo = p_participantes[i].getGenotipo();
             }
         }
         String cadena = id_menosApto + "," + genotipo;
+        //System.out.println("CADENA Menos APTO" + cadena);
         return cadena;
     }
 
@@ -417,7 +533,7 @@ public class Reto1 extends javax.swing.JFrame {
                 p_genotipos[i] = "0" + p_genotipos[i];
 
             }
-            System.out.println(p_genotipos[i]);
+            //System.out.println(p_genotipos[i]);
         }
 
     }

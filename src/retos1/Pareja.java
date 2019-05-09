@@ -22,9 +22,9 @@ public class Pareja {
     }
     
     
-    
-    
-    
+    public Pareja(Participante padre){
+        this.padre = padre;
+    }
 
     public Participante getPadre() {
         return padre;

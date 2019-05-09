@@ -14,11 +14,21 @@ public class Participante {
     int id, evaluacion;
     String genotipo;
 
-    public Participante(int id,  String genotipo) {
+    public Participante(int id, int evaluacion, String genotipo) {
         this.id = id;
+        this.evaluacion = evaluacion;
         this.genotipo = genotipo;
     }
 
+    public Participante( String genotipo,int id) {
+        this.id = id;
+        this.genotipo = genotipo;
+    }
+    
+    
+    
+
+    
     public String getGenotipo() {
         return genotipo;
     }
