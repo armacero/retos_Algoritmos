@@ -18,7 +18,7 @@ public class numerosAleatorios {
 
     public int[][] matriz_Distancias;
     public int[] Distancia;
-    public Double[] eFuncion;
+    public String[] eFuncion;
     
     
     public Double[] generador(int semilla, int cantidad) {
@@ -120,8 +120,10 @@ public class numerosAleatorios {
              {
                  int ciudad =ruta.get(i);
             int ciudadSiguiente = ruta.get(i+1);
+                 if (ciudadSiguiente!=0) {
+                     distancia= distancia+ matriz_Distancias[ciudad][ciudadSiguiente];
+                 }
             
-            distancia= distancia+ matriz_Distancias[ciudad][ciudadSiguiente];
              }
             
             
@@ -137,17 +139,27 @@ public class numerosAleatorios {
         
         int tamaño= combinaciones.size();
         Distancia = new int[tamaño];
-        eFuncion = new Double[tamaño];
+        eFuncion = new String[tamaño];
+        try {
         for (int i = 0; i < combinaciones.size(); i++) {
 
             Distancia[i] = sumatoria_Distancias(combinaciones.get(i));
             Double DistanciaC;
             DistanciaC = Distancia[i] * 1.0;
-            eFuncion[i] = 1 / DistanciaC;
+            DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+            simbolos.setDecimalSeparator('.');
+            DecimalFormat formateador = new DecimalFormat("#.#####", simbolos);
+            
+                eFuncion[i] = (formateador.format (1 / DistanciaC));
+            
+            
 
             System.out.println("Funcion: " + eFuncion[i] + "\n"
                     + "Distancia: " + Distancia[i]);
 
+        }
+            
+        } catch (Exception e) {
         }
         
     }
