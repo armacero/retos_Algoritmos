@@ -18,7 +18,7 @@ public class numerosAleatorios {
 
     public int[][] matriz_Distancias;
     public int[] Distancia;
-    public String[] eFuncion;
+    public String[] eFuncion, probabilidad;
     
     
     public Double[] generador(int semilla, int cantidad) {
@@ -162,6 +162,17 @@ public class numerosAleatorios {
         } catch (Exception e) {
         }
         
+    }
+    
+    public void calcular_probabilidad(ArrayList<ArrayList<Integer>> combinaciones)
+    {
+         int tamaño= combinaciones.size();
+        
+        probabilidad = new String[tamaño];
+        //int sumatoria = Sumatoria();
+        for (int i = 0; i < tamaño; i++) {
+            //probabilidad = eFuncion[i]/sumatoria;
+        }
     }
     
     

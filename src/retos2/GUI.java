@@ -32,8 +32,9 @@ import javax.swing.JTextArea;
  * @author Cipactly Torres
  */
 public class GUI extends JFrame{
+    int n,r;
     JTextArea messages;
-    public ArrayList<ArrayList<Integer>> Combinacion = new ArrayList<ArrayList<Integer>>();
+    ArrayList<ArrayList<Integer>> returnMe = new ArrayList<ArrayList<Integer>>();
      ArrayList<Integer> dentroLinea;
     public int num;
     public Double[] numeros_Aleatorios;
@@ -81,7 +82,7 @@ public class GUI extends JFrame{
                  numerosAleatorios numerosA= new numerosAleatorios();
                  numeros_Aleatorios= numerosA.generador((int) (Math.random()*(999-333)+300),num);
                  matriz_Distancias= numerosA.generar_Distancias((int) (Math.random()*(999-333)+300),num);
-                 numerosA.funcion_aptitud(Combinacion);
+                 numerosA.funcion_aptitud(returnMe);
             }
         });
         cuidades.add(menuItem);
@@ -89,7 +90,7 @@ public class GUI extends JFrame{
         return menuBar;
     }
     
-    public void generarComb(){
+   /* public void generarComb(){
         String r;
         
          dentroLinea = new ArrayList<Integer>();
@@ -112,5 +113,51 @@ public class GUI extends JFrame{
                 }
             }
         }
+    }
+    */
+    public int factorial(int n){
+        if(n!=0)
+        {
+            n=n*factorial(n-1);   
+        }
+        else{
+            return 1;
+        }
+        //System.out.println("factorial "+n);
+        return n;
+    }
+    
+    public void generarComb(){
+        //int numComb = factorial(n)/(factorial(n)*factorial(n-r));
+        int numComb = factorial(n)/factorial(n-r);
+        //(numeros, "", n, r);
+        System.out.println(returnMe);
+    }
+    
+    /**
+     *
+     * @param lista
+     * @return
+     */
+    public ArrayList<ArrayList<Integer>> listaPermutaciones(ArrayList<Integer> lista){
+        if (numeros.isEmpty()) {
+            ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+            result.add(new ArrayList<Integer>());
+            return result;
+        }
+        
+        Integer firstElement = lista.remove(0);
+        
+        ArrayList<ArrayList<Integer>> recursiveReturn = listaPermutaciones(lista);
+        for (ArrayList<Integer> li : recursiveReturn) {
+
+            for (int index = 0; index <= li.size(); index++) {
+                ArrayList<Integer> temp = new ArrayList<Integer>(li);
+                temp.add(index,numeros.indexOf(index));
+                returnMe.add(temp);
+            }
+
+        }
+        return returnMe;
     }
 }
