@@ -8,6 +8,7 @@ package retos2;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 /**
  *
@@ -16,8 +17,8 @@ import java.util.ArrayList;
 public class numerosAleatorios {
 
     public int[][] matriz_Distancias;
-    public int Distancia;
-    public Double eFuncion;
+    public int[] Distancia;
+    public Double[] eFuncion;
     
     
     public Double[] generador(int semilla, int cantidad) {
@@ -122,10 +123,16 @@ public class numerosAleatorios {
     public void funcion_aptitud()
     {
         GUI gui = new GUI();
-        Distancia =sumatoria_Distancias(gui.Combinacion);
+        int tamaño= gui.Combinacion.get(1).size();
+        Distancia = new int[tamaño];
+        eFuncion = new Double[tamaño];
+        for (int i = 0; i < tamaño; i++) {
+            Distancia[i] =sumatoria_Distancias(gui.Combinacion.get(i));
         Double DistanciaC;
-        DistanciaC = Distancia*1.0;
-        eFuncion = 1/DistanciaC ;
+        DistanciaC = Distancia[i]*1.0;
+        eFuncion[i] = 1/DistanciaC ;
+        }
+        
     }
     
     
